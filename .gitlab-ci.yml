@@ -1,0 +1,12 @@
+build:
+  image: bellsoft/liberica-openjdk-debian:17
+  stage: build
+  variables:
+    GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle"
+    GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  script:
+    - ./gradlew clean build
+  artifacts:
+    expire_in: 1 hour
+    reports:
+      junit: ./**/test-results/test/**/TEST-*.xml
