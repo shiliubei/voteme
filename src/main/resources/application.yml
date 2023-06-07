@@ -15,7 +15,7 @@ spring:
       hibernate.default_schema: vote
   flyway:
     schemas: vote
-    locations: filesystem:db/migration
+    locations: classpath:db/migration
     enabled: true
     group: true
     clean-disabled: false
