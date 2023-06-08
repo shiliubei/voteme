@@ -1,31 +1,25 @@
 spring:
   application:
     name: voting
-  web:
-    resources:
-      add-mappings: false
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: none
     database: postgresql
-    schemas: vote
-    properties:
-      hibernate.temp.use_jdbc_metadata_default: false
-      hibernate.default_schema: vote
   flyway:
     schemas: vote
-    locations: classpath:db/migration
     enabled: true
     group: true
-    clean-disabled: false
     connect-retries: 10000
     connect-retries-interval: 16s
-
+    baseline-on-migrate: true
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
-    hikari:
-      minimum-idle: 0
+logging:
+  level:
+    org.flywaydb: DEBUG
+
+
