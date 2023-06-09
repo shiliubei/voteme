@@ -31,11 +31,18 @@ public class JdbcRepository {
     }
 
     public boolean isUserExist(UUID userUuid) {
-        String sql = "SELECT EXISTS(SELECT 1 FROM vote.voting WHERE userUuid = :userUuid)";
+        String sql = "SELECT EXISTS(SELECT 1 FROM vote.voting WHERE user_uuid = :userUuid)";
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("userUuid", userUuid);
 
         return jdbcTemplate.queryForObject(sql, parameters, Boolean.class);
+    }
+
+    public long countByVoteValue(boolean voteValue) {
+        String sql = "SELECT COUNT(*) FROM vote.voting WHERE vote_value = :voteValue";
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("voteValue", voteValue);
+        return jdbcTemplate.queryForObject(sql, parameters, Long.class);
     }
 
 
